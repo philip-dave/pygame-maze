@@ -15,7 +15,7 @@ def create_grid(start_x,start_y):
   for i in range(0,grid_size):
     row = []
     for k in range(0, grid_size):
-      cell = Cell(start_x,start_y,[i,k])
+      cell = Cell(start_x,start_y,[k,i])
       start_x+=30
       row.append(cell)
     ordered_grid.append(row)
@@ -30,7 +30,7 @@ def redraw_borders(cells):
     all_cells.update()
     all_cells.draw(screen)
     pygame.display.update()
-    sleep(0.1)
+    sleep(0.8)
 
 
 #height, width, and colour numeric values

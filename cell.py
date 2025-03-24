@@ -20,18 +20,16 @@ class Cell(pygame.sprite.Sprite):
     def draw_borders(self):
         test = ""
         if self.walls[0] == 1:
-            pygame.draw.line(self.image,BLACK,[0,0],[0,height+1],width=2)
-        # if self.walls[0] == 1:
-        #     pygame.draw.line(self.image,BLACK,[0,0],[0,height+2],width=2)
+            pygame.draw.line(self.image,BLACK,[0,0],[0,height+2],width=2)
        
-        # if self.walls[1] == 1:
-        #     pygame.draw.line(self.image,BLACK,[width-2,0],[width-2,height+2],width=2)
+        if self.walls[1] == 1:
+            pygame.draw.line(self.image,BLACK,[width-2,0],[width-2,height+2],width=2)
        
-        # if self.walls[2] == 1:
-        #     pygame.draw.line(self.image,BLACK,[0-2,0],[width,0],width=2)
+        if self.walls[2] == 1:
+            pygame.draw.line(self.image,BLACK,[0-2,0-2],[width,-2],width=2)
         
-        # if self.walls[3] == 1:
-        #     pygame.draw.line(self.image,BLACK,[0,height-2],[width,height-2],width=2)
+        if self.walls[3] == 1:
+            pygame.draw.line(self.image,BLACK,[0,height-2],[width,height-2],width=2)
         
 
     

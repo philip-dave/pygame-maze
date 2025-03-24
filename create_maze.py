@@ -73,6 +73,7 @@ class Maze(pygame.sprite.Sprite):
             if cell in self.frontier:
                 self.frontier.remove(cell)
             
+            test = self.grid[position[0]][position[1]]
             if len(self.frontier)>0:
                 position = self.frontier[randint(0,len(self.frontier)-1)]
                 neighbours = self.get_new_frontier(position)
