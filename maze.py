@@ -30,7 +30,7 @@ def redraw_borders(cells):
     all_cells.update()
     all_cells.draw(screen)
     pygame.display.update()
-    sleep(0.1)
+    sleep(0.5)
 
 
 #height, width, and colour numeric values
