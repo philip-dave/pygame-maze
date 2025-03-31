@@ -18,6 +18,9 @@ class Maze(pygame.sprite.Sprite):
             for k in range(self.max):
                 self.all_cells.add(self.grid[i][k])
 
+    """
+    Drawing borders in real time to see maze progress
+    """
     def draw_borders(self):
         self.screen.fill((100, 0, 150))
         pygame.display.flip()
@@ -32,6 +35,13 @@ class Maze(pygame.sprite.Sprite):
         pygame.display.update()
         sleep(0.8)
 
+    """
+    Gets the new frontier from the current position
+    Left, Right, Top, Bottom
+    Invalid positions are not added
+    Added ones must not be in the frontier already
+    Added ones must not already have been used by cell before (bad logic here)
+    """
     def get_new_frontier(self,position):
         neighbor_set = []
         left = [position[0],position[1]-1]
@@ -72,7 +82,10 @@ class Maze(pygame.sprite.Sprite):
      
     def get_random_neighbour(self,neighbours):
         return neighbours[randint(0,len(neighbours)-1)]
-    
+    """
+    Removing walls from the random neighbour
+    Checking if the neighbor is left, right, top or bottom and removing appropriate walls
+    """
     def remove_walls(self,cell,neighbour):
         if cell[0]==0:
             print(self.grid[cell[0]][cell[1]].walls)
