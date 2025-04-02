@@ -20,8 +20,12 @@ class Cell(pygame.sprite.Sprite):
         self.walls = [1,1,1,1]
         self.is_front = False
         self.is_current = False
+        #keeping track of neighbours already visited
         self.used_neighbours = []
         #self.draw_borders()
+
+    #Drawing the borders based on walls
+    #Colours the cell by their status: current cell, frontier, unmapped
     def draw_borders(self):
         if self.is_current:
             self.image.fill((255,0,0))

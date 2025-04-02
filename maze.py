@@ -35,7 +35,7 @@ def redraw_borders(cells):
     all_cells.update()
     all_cells.draw(screen)
     pygame.display.update()
-    sleep(0.2)
+    #sleep(0.2)
 
 
 #height, width, and colour numeric values
@@ -57,7 +57,7 @@ all_cells = pygame.sprite.Group()
 for cell in cells:
   for c in cell:
     all_cells.add(c)
-#redraw_borders(all_cells)
+redraw_borders(all_cells)
 
 while True:
   all_cells.update()

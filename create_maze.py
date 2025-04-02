@@ -34,7 +34,7 @@ class Maze(pygame.sprite.Sprite):
         self.all_cells.draw(self.screen)
         pygame.display.update()
         pygame.display.flip()
-        sleep(0.4)
+        sleep(0.8)
 
     """
     Gets the new frontier from the current position
@@ -51,37 +51,37 @@ class Maze(pygame.sprite.Sprite):
         bottom = [position[0]+1,position[1]]
         used_neighbours = self.grid[position[0]][position[1]].used_neighbours
         if left not in self.maze and left[1]>=0 and left not in self.frontier and left not in used_neighbours:
-            self.grid[left[1]][left[0]].is_front = True
+            self.grid[left[0]][left[1]].is_front = True
             self.frontier.append(left)
             neighbor_set.append(left)
         elif left[1]>=0 and left not in used_neighbours:
             #self.grid[left[1]][left[0]].is_front = True
             neighbor_set.append(left)
         if right not in self.maze and right[1]<self.max and right not in self.frontier and  right not in used_neighbours:
-            self.grid[right[1]][right[0]].is_front = True
+            self.grid[right[0]][right[1]].is_front = True
             self.frontier.append(right)
             neighbor_set.append(right)
         elif right[1]<self.max-1 and  right not in used_neighbours:
             #self.grid[right[1]][right[0]].is_front = True
             neighbor_set.append(right)
         if top not in self.maze and top[0]>=0 and top not in self.frontier and top not in used_neighbours:
-            self.grid[top[1]][top[0]].is_front = True
+            self.grid[top[0]][top[1]].is_front = True
             self.frontier.append(top)
             neighbor_set.append(top)
         elif top[0]>=0 and top not in used_neighbours:
             #self.grid[top[1]][top[0]].is_front = True
             neighbor_set.append(top)
         if bottom not in self.maze and bottom[0]!=self.max and bottom not in self.frontier and bottom not in used_neighbours:
-            self.grid[bottom[1]][bottom[0]].is_front = True
+            self.grid[bottom[0]][bottom[1]].is_front = True
             self.frontier.append(bottom)
             neighbor_set.append(bottom)
-        elif position[0]<self.max-1 and bottom not in used_neighbours:
+        elif bottom[0]<self.max-1 and bottom not in used_neighbours:
             #self.grid[bottom[1]][bottom[0]].is_front = True
             neighbor_set.append(bottom)
         return neighbor_set
 
      
-    def get_random_neighbour(self,neighbours):
+    def get_random_neighbour(self,neighbours,cell):
         return neighbours[randint(0,len(neighbours)-1)]
     """
     Removing walls from the random neighbour
@@ -117,10 +117,13 @@ class Maze(pygame.sprite.Sprite):
                 
                 self.frontier.remove(cell)
                 self.maze.append(cell)
-            neighbour = self.get_random_neighbour(neighbours)
-            self.grid[cell[0]][cell[1]].used_neighbours.append(neighbour)
-            self.remove_walls(cell,neighbour)
-            self.maze.append(cell)
+            if len(neighbours)!=0:
+                
+                neighbour = self.get_random_neighbour(neighbours,cell)
+                self.grid[cell[0]][cell[1]].used_neighbours.append(neighbour)
+                self.grid[neighbour[0]][neighbour[1]].used_neighbours.append(cell)
+                self.remove_walls(cell,neighbour)
+                self.maze.append(cell)
             
             
             self.grid[cell[0]][cell[1]].is_front = False
