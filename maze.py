@@ -57,7 +57,7 @@ all_cells = pygame.sprite.Group()
 for cell in cells:
   for c in cell:
     all_cells.add(c)
-redraw_borders(all_cells)
+#redraw_borders(all_cells)
 
 while True:
   all_cells.update()

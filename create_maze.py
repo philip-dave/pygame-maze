@@ -33,7 +33,8 @@ class Maze(pygame.sprite.Sprite):
         self.all_cells.update()
         self.all_cells.draw(self.screen)
         pygame.display.update()
-        sleep(0.8)
+        pygame.display.flip()
+        sleep(0.4)
 
     """
     Gets the new frontier from the current position
@@ -87,10 +88,8 @@ class Maze(pygame.sprite.Sprite):
     Checking if the neighbor is left, right, top or bottom and removing appropriate walls
     """
     def remove_walls(self,cell,neighbour):
-        if cell[0]==0:
-            print(self.grid[cell[0]][cell[1]].walls)
-            print(self.grid[neighbour[0]][neighbour[1]].walls)
-            print("-----------------")
+        bad_walls = [1,1,1,1]
+        
         if cell[0]-1==neighbour[0]:
             self.grid[cell[0]][cell[1]].walls[2] = 0
             self.grid[neighbour[0]][neighbour[1]].walls[3] = 0
@@ -103,11 +102,7 @@ class Maze(pygame.sprite.Sprite):
         elif cell[1]+1==neighbour[1]:
             self.grid[cell[0]][cell[1]].walls[1] = 0
             self.grid[neighbour[0]][neighbour[1]].walls[0] = 0
-        if cell[0]==0:
-            print(self.grid[cell[0]][cell[1]].walls)
-            print(self.grid[neighbour[0]][neighbour[1]].walls)
-            print("-----------------")
-        test3 = ""
+        
 
     def create_maze(self):
         position = [5,5]
@@ -116,24 +111,24 @@ class Maze(pygame.sprite.Sprite):
         neighbours = self.get_new_frontier(position)
         while len(self.frontier)>0:
             cell = position
-            
+            self.grid[cell[0]][cell[1]].is_current = True
+            self.draw_borders()
             if cell in self.frontier:
                 
                 self.frontier.remove(cell)
                 self.maze.append(cell)
             neighbour = self.get_random_neighbour(neighbours)
-            self.grid[cell[1]][cell[0]].used_neighbours.append(neighbour)
+            self.grid[cell[0]][cell[1]].used_neighbours.append(neighbour)
             self.remove_walls(cell,neighbour)
             self.maze.append(cell)
             
-            self.draw_borders()
-            self.grid[cell[1]][cell[0]].is_front = False
-            self.grid[cell[1]][cell[0]].is_current = False
-            test = self.grid[position[1]][position[0]]
+            
+            self.grid[cell[0]][cell[1]].is_front = False
+            self.grid[cell[0]][cell[1]].is_current = False
             if len(self.frontier)>0:
                 position = self.frontier[randint(0,len(self.frontier)-1)]
-                self.grid[position[1]][position[0]].is_current = True
+                
                 neighbours = self.get_new_frontier(position)
          
-        
+            
         return self.grid
