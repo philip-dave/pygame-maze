@@ -5,7 +5,7 @@ from cell import Cell
 from create_maze import Maze
 start_x = 50
 start_y = 50
-grid_size = 11
+grid_size = 3
 pygame.init()
 
 
