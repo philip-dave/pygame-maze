@@ -22,8 +22,8 @@ class Maze(pygame.sprite.Sprite):
     Drawing borders in real time to see maze progress
     """
     def draw_borders(self):
-        self.screen.fill((100, 0, 150))
-        pygame.display.flip()
+        #self.screen.fill((100, 0, 150))
+        #pygame.display.flip()
         self.all_cells.empty()
         self.set_group()
         for cell in self.all_cells:

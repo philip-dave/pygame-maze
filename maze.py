@@ -5,7 +5,7 @@ from cell import Cell
 from create_maze import Maze
 start_x = 50
 start_y = 50
-grid_size = 11
+grid_size = 15
 pygame.init()
 
 
@@ -39,7 +39,7 @@ def redraw_borders(cells):
 
 
 #height, width, and colour numeric values
-width, height = 400, 400
+width, height = grid_size*50, grid_size*50
 backgroundColor = 100, 0, 150
 
 #setting our screen and filling our background
