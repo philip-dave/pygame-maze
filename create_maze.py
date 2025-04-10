@@ -34,7 +34,7 @@ class Maze(pygame.sprite.Sprite):
         self.all_cells.draw(self.screen)
         pygame.display.update()
         pygame.display.flip()
-        sleep(0.2)
+        sleep(0.1)
 
     """
     Gets the new frontier from the current position
@@ -105,7 +105,7 @@ class Maze(pygame.sprite.Sprite):
         
 
     def create_maze(self):
-        position = [self.max//2,self.max//2]
+        position = [randint(0,self.max-1),randint(0,self.max-1)]
         self.grid[position[0]][position[1]].is_current = True 
         
         self.get_new_frontier(position)
