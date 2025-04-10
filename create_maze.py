@@ -117,6 +117,7 @@ class Maze(pygame.sprite.Sprite):
             cell = position
             neighbour = self.get_random_neighbour(cell,is_first)
             is_first = False
+            self.maze.append(cell)
             self.maze.append(neighbour)
             self.remove_walls(cell,neighbour)
             self.draw_borders()
