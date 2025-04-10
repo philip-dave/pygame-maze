@@ -125,7 +125,7 @@ class Maze(pygame.sprite.Sprite):
                 self.frontier.remove(cell)
             if neighbour in self.frontier:
                 self.frontier.remove(neighbour)
-            self.get_new_frontier(neighbour)
+            self.get_new_frontier(cell)
             self.grid[cell[0]][cell[1]].is_current = False
             self.grid[cell[0]][cell[1]].is_front = False
             self.grid[neighbour[0]][neighbour[1]].is_front = False
