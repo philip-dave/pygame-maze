@@ -3,9 +3,10 @@ from time import sleep
 import pygame.sprite
 from cell import Cell
 from create_maze import Maze
+from mouse import Mouse
 start_x = 50
 start_y = 50
-grid_size = 15
+grid_size = 7
 pygame.init()
 
 
@@ -37,6 +38,11 @@ def redraw_borders(cells):
     pygame.display.update()
     #sleep(0.2)
 
+#creating Mouse
+mouse = Mouse(start_x,start_y)
+mouse_group = pygame.sprite.Group()
+mouse_group.add(mouse)
+
 
 #height, width, and colour numeric values
 width, height = grid_size*50, grid_size*50
@@ -50,17 +56,21 @@ screen.fill(backgroundColor)
 pygame.display.flip()
 
 ordered_grid = create_grid(start_x,start_y)
-
 maze = Maze(ordered_grid,grid_size,screen)
 cells = maze.create_maze()
 all_cells = pygame.sprite.Group()
+
 for cell in cells:
   for c in cell:
     all_cells.add(c)
 redraw_borders(all_cells)
-
+count = 1
 while True:
-  all_cells.update()
-  all_cells.draw(screen)
+  if count>4:
+    count = 0
+  mouse.turn(count)
+  mouse_group.update()
+  mouse_group.draw(screen)
   pygame.display.update()
-  sleep(10/1000)
+  count+=1
+  sleep(10/100)
