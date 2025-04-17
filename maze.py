@@ -38,19 +38,21 @@ def redraw_borders(cells):
     pygame.display.update()
     #sleep(0.2)
 
+  
+#setting our screen and filling our background
+screen = pygame.display.set_mode((width, height))
+screen.fill(backgroundColor)
+
 #creating Mouse
-mouse = Mouse(start_x,start_y)
+mouse = Mouse(start_x,start_y,grid_size,screen)
 mouse_group = pygame.sprite.Group()
-mouse_group.add(mouse)
+mouse_group.add(mouse,)
+mouse.group = mouse_group
 
 
 #height, width, and colour numeric values
 width, height = grid_size*50, grid_size*50
 backgroundColor = 100, 0, 150
-
-#setting our screen and filling our background
-screen = pygame.display.set_mode((width, height))
-screen.fill(backgroundColor)
 
 #updating our screen
 pygame.display.flip()
@@ -64,13 +66,13 @@ for cell in cells:
   for c in cell:
     all_cells.add(c)
 redraw_borders(all_cells)
-count = 1
+mouse.direction = 1
 while True:
-  if count>4:
-    count = 0
-  mouse.turn(count)
+  
+  mouse.move(ordered_grid)
+  all_cells.update()
+  all_cells.draw(screen) 
   mouse_group.update()
   mouse_group.draw(screen)
   pygame.display.update()
-  count+=1
-  sleep(10/100)
+  sleep(0.2)
